@@ -11,6 +11,7 @@ import {
   setDoc,
   getDoc
 } from 'firebase/firestore';
+import bcrypt from 'bcryptjs';
 
 const LoginSignup = ({ onLogin }) => {
   const [alias, setAlias] = useState('');
@@ -31,12 +32,12 @@ const handleSignup = async () => {
   try {
     const email = fakeEmail(alias); // e.g., hey@alias.local
     const recovery = generateRecoveryKey();
+    const hashedRecovery = await bcrypt.hash(recovery, 10);
 
     await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(auth.currentUser, { displayName: alias });
 
     const uid = auth.currentUser.uid;
-
     localStorage.setItem("uid", uid);
     localStorage.setItem("userEmail", email);
 
@@ -46,7 +47,7 @@ await fetch("http://localhost:5000/recovery", {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     user_email: uid,
-    recovery_hash: recovery
+    recovery_hash: hashedRecovery
   })
 });
 
@@ -75,7 +76,8 @@ await fetch("http://localhost:5000/recovery", {
     console.log("Derived email:", fakeEmail(alias));
     console.log("UID: ", localStorage.getItem("uid"));
 
-    const token = await auth.currentUser.getIdToken();
+    const token = await auth.currentUser.getIdToken(true);
+    localStorage.setItem("token", token);
     console.log("Firebase ID Token:", token);
   } catch (err) {
     setMessage(err.message);
