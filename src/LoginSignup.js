@@ -1,17 +1,11 @@
 import logo from './logo.svg'; // adjust the path if needed
 import React, { useState } from 'react';
-import { auth, db } from './firebase';
+import { auth } from './firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import {
-  doc,
-  setDoc,
-  getDoc
-} from 'firebase/firestore';
-import bcrypt from 'bcryptjs';
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
