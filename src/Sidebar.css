@@ -1,0 +1,202 @@
+/* Sidebar container */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-right: 1px solid var(--border-color);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* This centers both image and text horizontally */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.user-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%; /* Optional: make it circular */
+}
+
+/* Sidebar title */
+.sidebar h3 {
+  color: var(--accent-color);
+  font-size: 30px;
+}
+
+/* Navigation list */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* Rating section */
+.rating {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.rating p {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Star rating layout */
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Individual star button */
+.star {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.2s ease, transform 0.1s ease;
+  padding: 0;
+  margin: 0;
+}
+
+/* Filled (selected) star */
+.star.filled {
+  color: var(--accent-color);
+}
+
+/* Remove browser outline */
+.star:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Optional: hover effect for nice interaction */
+.star:hover {
+  transform: scale(1.2);
+  color: var(--accent-color);
+}
+
+/* Settings dropdown panel */
+.settings-panel {
+  background-color: #2e2e42;
+  border: 1px solid #444;
+  padding: 12px 16px;
+  border-radius: 8px;
+  width: 90%;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.settings-panel h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #ddd;
+  border-bottom: 1px solid #444;
+  padding-bottom: 6px;
+  text-align: center;
+}
+
+.settings-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-panel ul li {
+  padding: 10px;
+  margin-bottom: 6px;
+  color: #ccc;
+  background-color: #383858;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: center;
+}
+
+.settings-panel ul li:hover {
+  background-color: #4a4a6a;
+  color: #fff;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar li.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.comment-box {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comment-box textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Segoe UI', sans-serif;
+  resize: vertical;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  outline: none;
+}
+
+.comment-box textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.comment-box button {
+  align-self: flex-end;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.comment-box button:hover {
+  background-color: #2563eb;
+}
