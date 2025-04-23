@@ -4,6 +4,8 @@ import userlogo from './userlogo.png';
 import { getAuth, deleteUser } from "firebase/auth";
 import { getFirestore, doc, deleteDoc, collection, getDocs } from "firebase/firestore";
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const StarRating =({ userId }) => {
   const [rating, setRating] = useState(0);
   const [showCommentBox, setShowCommentBox] = useState(false);
@@ -26,7 +28,7 @@ const StarRating =({ userId }) => {
   const handleSubmit = () => {
     const token=localStorage.getItem("token")
     const user_id = userId;
-    fetch('http://localhost:5000/feedback', {
+    fetch('${baseUrl}/feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
           "Authorization": `Bearer ${token}`  // ← KEY LINE
@@ -118,7 +120,7 @@ const savePreferences = () => {
   if (theme === "light") {
     document.body.classList.add("light-mode");
   }
-  fetch("http://localhost:5000/save-preferences", {
+  fetch(`${baseUrl}/save-preferences`, {
     method: "POST",
     headers: { "Content-Type": "application/json",
               "Authorization": `Bearer ${token}`  // ← KEY LINE
@@ -143,7 +145,7 @@ React.useEffect(() => {
 
   if (!user_id || !token) return;
 
-  fetch(`http://localhost:5000/get-preferences?user_id=${user_id}`, {
+  fetch(`${baseUrl}/get-preferences?user_id=${user_id}`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`

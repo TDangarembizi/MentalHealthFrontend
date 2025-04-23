@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Resources.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const ResourceCard = ({ title, description, link, action }) => (
   <div className="resource-card">
     <h3>{title}</h3>
@@ -38,7 +40,7 @@ useEffect(() => {
   };
 
   // Fetch latest assessment
-  fetch(`http://localhost:5000/assessment/results?user_id=${user_id}`, { headers })
+  fetch(`${baseUrl}/assessment/results?user_id=${user_id}`, { headers })
     .then(res => res.json())
     .then(data => {
       if (!Array.isArray(data) || data.length === 0) return;
@@ -51,7 +53,7 @@ useEffect(() => {
     });
 
   // Fetch moods and calculate streak
-  fetch(`http://localhost:5000/mood?user_id=${user_id}`, { headers })
+  fetch(`${baseUrl}/mood?user_id=${user_id}`, { headers })
     .then(res => res.json())
     .then(data => {
       const streak = Array.isArray(data) ? calculateStreak(data) : 0;

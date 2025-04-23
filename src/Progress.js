@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import MoodChart from './MoodChart';
 import './Progress.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const Progress = () => {
   const [assessments, setAssessments] = useState([]);
   const [journalCount, setJournalCount] = useState(0);
@@ -24,7 +26,7 @@ const Progress = () => {
   };
 
   // Fetch assessments
-  fetch(`http://localhost:5000/assessment/results?user_id=${user_id}`, { headers })
+  fetch(`${baseUrl}/assessment/results?user_id=${user_id}`, { headers })
     .then(res => res.json())
     .then(data => {
       if (Array.isArray(data)) setAssessments(data);
@@ -36,7 +38,7 @@ const Progress = () => {
     });
 
   // Fetch journal entries
-  fetch(`http://localhost:5000/journal?user_id=${user_id}`, { headers })
+  fetch(`${baseUrl}/journal?user_id=${user_id}`, { headers })
     .then(res => res.json())
     .then(data => setJournalCount(Array.isArray(data) ? data.length : 0))
     .catch(err => {
@@ -45,7 +47,7 @@ const Progress = () => {
     });
 
   // Fetch moods
-  fetch(`http://localhost:5000/mood?user_id=${user_id}`, { headers })
+  fetch(`${baseUrl}/mood?user_id=${user_id}`, { headers })
     .then(res => res.json())
     .then(data => setMoodCount(Array.isArray(data) ? data.length : 0))
     .catch(err => {

@@ -4,6 +4,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const moodScale = {
   happy: 5,
   okay: 4,
@@ -22,7 +24,7 @@ const MoodChart = () => {
 
   if (!user_id || !token) return;
 
-  fetch(`http://localhost:5000/mood?user_id=${user_id}`, {
+  fetch(`${baseUrl}/mood?user_id=${user_id}`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`

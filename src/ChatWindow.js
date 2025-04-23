@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import './ChatWindow.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const ChatWindow = ({messages, setMessages, sessionId, setSessionId}) => {
   const user_id = localStorage.getItem("uid");
 
@@ -37,7 +39,7 @@ const ChatWindow = ({messages, setMessages, sessionId, setSessionId}) => {
 const sessionId = sessionStorage.getItem("chatSessionId");
 const token=localStorage.getItem("token")
 
-const response = await fetch('http://localhost:5000/chat', {
+const response = await fetch('${baseUrl}/chat', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`  // ← KEY LINE

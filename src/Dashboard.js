@@ -13,6 +13,8 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Tooltip);
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const Dashboard = ({ moodUpdated, setMoodUpdated }) => {
     const [assessments, setAssessments] = useState([]);
     const user_id = localStorage.getItem("uid");
@@ -26,7 +28,7 @@ const Dashboard = ({ moodUpdated, setMoodUpdated }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:5000/assessment/results?user_id=${user_id}`, {
+      const res = await fetch(`${baseUrl}/assessment/results?user_id=${user_id}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -75,7 +77,7 @@ useEffect(() => {
 
   const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:5000/journal?user_id=${user_id}`, {
+  fetch(`${baseUrl}/journal?user_id=${user_id}`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`
@@ -97,7 +99,7 @@ useEffect(() => {
 
   const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:5000/mood?user_id=${user_id}`, {
+  fetch(`${baseUrl}/mood?user_id=${user_id}`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`
@@ -137,7 +139,7 @@ useEffect(() => {
 
   const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:5000/mood?user_id=${user_id}`, {
+  fetch(`${baseUrl}/mood?user_id=${user_id}`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`

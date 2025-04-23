@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Assessment.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const PHQ9_QUESTIONS = [
   "Little interest or pleasure in doing things?",
   "Feeling down, depressed, or hopeless?",
@@ -71,7 +73,7 @@ const Assessment = () => {
     try {
       const token=localStorage.getItem("token")
 
-      const res = await fetch('http://localhost:5000/assessment', {
+      const res = await fetch('${baseUrl}/assessment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
                   "Authorization": `Bearer ${token}`  // ← KEY LINE

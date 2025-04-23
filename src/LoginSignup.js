@@ -13,6 +13,8 @@ import {
 } from 'firebase/firestore';
 import bcrypt from 'bcryptjs';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const LoginSignup = ({ onLogin }) => {
   const [alias, setAlias] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +42,7 @@ const handleSignup = async () => {
     localStorage.setItem("uid", uid);
     localStorage.setItem("userEmail", email);
 
-await fetch("http://localhost:5000/recovery", {
+await fetch(`${baseUrl}/recovery`, {
 
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -87,7 +89,7 @@ await fetch("http://localhost:5000/recovery", {
   const handleRecovery = async () => {
 
   try {
-    const response = await fetch("http://localhost:5000/forgot-password", {
+    const response = await fetch(`${baseUrl}/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

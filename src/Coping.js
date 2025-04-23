@@ -1,6 +1,8 @@
 import './Coping.css';
 import { useState } from 'react';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const Coping = () => {
   const [journalText, setJournalText] = useState("");
   const [saveMsg, setSaveMsg] = useState("");
@@ -16,7 +18,7 @@ const Coping = () => {
     };
 
     const token=localStorage.getItem("token")
-    const res = await fetch("http://localhost:5000/journal", {
+    const res = await fetch(`${baseUrl}/journal`, {
       method: "POST",
       headers: { "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`  // ← KEY LINE

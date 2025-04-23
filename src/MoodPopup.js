@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './MoodPopup.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const moods = [
   { label: "😊 Happy", value: "happy" },
   { label: "😐 Okay", value: "okay" },
@@ -23,7 +25,7 @@ const MoodPopup = ({ onClose,setMoodUpdated }) => {
     };
 
     const token=localStorage.getItem("token");
-    await fetch(`http://localhost:5000/mood`, {
+    await fetch(`${baseUrl}/mood`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`  // ← KEY LINE
