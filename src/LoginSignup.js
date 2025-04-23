@@ -11,7 +11,6 @@ import {
   setDoc,
   getDoc
 } from 'firebase/firestore';
-import bcrypt from 'bcryptjs';
 
 const LoginSignup = ({ onLogin }) => {
   const [alias, setAlias] = useState('');
@@ -32,7 +31,6 @@ const handleSignup = async () => {
   try {
     const email = fakeEmail(alias); // e.g., hey@alias.local
     const recovery = generateRecoveryKey();
-    const hashedRecovery = await bcrypt.hash(recovery, 10);
 
     await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(auth.currentUser, { displayName: alias });
@@ -48,7 +46,7 @@ await fetch("http://localhost:5000/recovery", {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     user_email: uid,
-    recovery_hash: hashedRecovery
+    recovery_hash: recovery
   })
 });
 
