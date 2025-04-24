@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 
 const baseUrl = process.env.REACT_APP_API_BASE;
+console.log("Base URL:", baseUrl);
 
 const LoginSignup = ({ onLogin }) => {
   const [alias, setAlias] = useState('');
