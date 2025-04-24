@@ -22,6 +22,7 @@ import Depression from "./Depression";
 import Anxiety from "./Anxiety";
 import Wellbeing from "./Wellbeing";
 import About from "./About";
+import {auth} from "./firebase";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
