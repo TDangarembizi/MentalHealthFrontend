@@ -45,6 +45,17 @@ function App() {
     sessionStorage.setItem('view', view);
   }, [view]);
 
+  useEffect(() => {
+    const refreshToken=async()=>{
+      const user=auth.currentUser;
+      if(user){
+        const token=await user.getIdToken(true);
+        localStorage.setItem("token",token);
+      }
+    };
+    refreshToken();
+  }, []);
+
   const [sessionId, setSessionId] = useState(null);
   const [messages, setMessages] = useState([]);
 
