@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import './ChatWindow.css';
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -37,7 +38,7 @@ const ChatWindow = ({messages, setMessages, sessionId, setSessionId}) => {
 
   try {
 const sessionId = sessionStorage.getItem("chatSessionId");
-const token=localStorage.getItem("token")
+const token= await auth.currentUser.getIdToken(true);
 
 const response = await fetch('${baseUrl}/chat', {
   method: 'POST',

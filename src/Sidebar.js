@@ -3,6 +3,7 @@ import './Sidebar.css';
 import userlogo from './userlogo.png';
 import { getAuth, deleteUser } from "firebase/auth";
 import { getFirestore, doc, deleteDoc, collection, getDocs } from "firebase/firestore";
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -25,8 +26,8 @@ const StarRating =({ userId }) => {
     setSubmitted(false);
   };
 
-  const handleSubmit = () => {
-    const token=localStorage.getItem("token")
+  const handleSubmit = async () => {
+    const token= await auth.currentUser.getIdToken(true)
     const user_id = userId;
     fetch('${baseUrl}/feedback', {
       method: 'POST',
@@ -111,9 +112,9 @@ const handleThemeChange = (selectedTheme) => {
   document.body.classList.toggle('dark', selectedTheme === 'dark');
 };
 
-const savePreferences = () => {
+const savePreferences = async() => {
   const user_id = userId;
-  const token=localStorage.getItem("token");
+  const token= await auth.currentUser.getIdToken(true);
   localStorage.setItem("theme", theme);
 
   document.body.classList.remove("light-mode");

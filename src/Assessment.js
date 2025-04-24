@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Assessment.css';
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -71,7 +72,7 @@ const Assessment = () => {
     };
 
     try {
-      const token=localStorage.getItem("token")
+      const token= await auth.currentUser.getIdToken(true);
 
       const res = await fetch('${baseUrl}/assessment', {
         method: 'POST',

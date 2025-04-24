@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChatWindow from './ChatWindow';
 import logo from './logo.svg';
 import './ChatPage.css';
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -44,7 +45,7 @@ const ChatPage = () => {
   const loadChatSessions = async () => {
     if (user_id) {
       try {
-        const token = localStorage.getItem("token");
+const token= await auth.currentUser.getIdToken(true);
 
         const res = await fetch(`/chat-sessions?user_id=${user_id}`, {
           method: "GET",
@@ -77,7 +78,7 @@ useEffect(() => {
   const loadChatHistory = async () => {
     if (user_id && sessionId) {
       try {
-        const token = localStorage.getItem("token");
+const token= await auth.currentUser.getIdToken(true);
 
         const res = await fetch(`${baseUrl}/chat-history?user_id=${user_id}&session_id=${sessionId}`, {
           method: "GET",

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MoodPopup.css';
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -24,7 +25,7 @@ const MoodPopup = ({ onClose,setMoodUpdated }) => {
       timestamp: new Date().toISOString()
     };
 
-    const token=localStorage.getItem("token");
+    const token= await auth.currentUser.getIdToken(true);
     await fetch(`${baseUrl}/mood`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',

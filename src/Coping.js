@@ -1,5 +1,6 @@
 import './Coping.css';
 import { useState } from 'react';
+import {auth} from "./firebase";
 
 const baseUrl = process.env.REACT_APP_API_BASE;
 
@@ -17,7 +18,7 @@ const Coping = () => {
       timestamp: new Date().toISOString()
     };
 
-    const token=localStorage.getItem("token")
+    const token= await auth.currentUser.getIdToken(true);
     const res = await fetch(`${baseUrl}/journal`, {
       method: "POST",
       headers: { "Content-Type": "application/json",
