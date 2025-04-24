@@ -40,7 +40,7 @@ const ChatWindow = ({messages, setMessages, sessionId, setSessionId}) => {
 const sessionId = sessionStorage.getItem("chatSessionId");
 const token= await auth.currentUser.getIdToken(true);
 
-const response = await fetch('${baseUrl}/chat', {
+const response = await fetch(`${baseUrl}/chat`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`  // ← KEY LINE
