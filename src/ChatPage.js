@@ -3,6 +3,8 @@ import ChatWindow from './ChatWindow';
 import logo from './logo.svg';
 import './ChatPage.css';
 
+const baseUrl = process.env.REACT_APP_API_BASE;
+
 const ChatPage = () => {
   const [user_id, setUserId] = useState(() => localStorage.getItem("uid"));
   const [sessionId, setSessionId] = useState(() => sessionStorage.getItem("chatSessionId") || null);
