@@ -74,7 +74,7 @@ const Assessment = () => {
     try {
       const token= await auth.currentUser.getIdToken(true);
 
-      const res = await fetch('${baseUrl}/assessment', {
+      const res = await fetch(`${baseUrl}/assessment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
                   "Authorization": `Bearer ${token}`  // ← KEY LINE
