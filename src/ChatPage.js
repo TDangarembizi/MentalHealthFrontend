@@ -77,12 +77,23 @@ useEffect(() => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`/chat-history?user_id=${user_id}&session_id=${sessionId}`, {
+        const res = await fetch(`${baseUrl}/chat-history?user_id=${user_id}&session_id=${sessionId}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`
           }
         });
+
+        if (res.status === 304) {
+          console.log("No new messages. Using cached version.");
+          return;
+        }
+
+        if (!res.ok) {
+          const err = await res.text();  // capture actual error body
+          console.error("Server returned error:", err);
+          return;
+        }
 
         const data = await res.json();
 
